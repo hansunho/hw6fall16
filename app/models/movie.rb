@@ -22,4 +22,18 @@ class Movie < ActiveRecord::Base
     end
        "No MPAA raiting available"
   end
+  
+  def add_selected_movies(movies)
+    for i in 0..movies.size-1
+      tmdbMovie = Tmdb::Find.imdb_id(i)
+      movie = Movie.new()
+      movie.title = tmdbMovie.title
+      movie.release_date = tmdbMovie.release_date
+      movie.rating = find_rating(i)
+      movie.description = tmdbMovie.overview
+      movie.save!
+    end
+  end
+  
+  
 end

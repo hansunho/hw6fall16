@@ -61,6 +61,11 @@ class MoviesController < ApplicationController
     redirect_to movies_path
   end
   
+  def add_selected_movies
+    selected_movies = params[:tmdb_movies].keys
+    Movie.add_selected_movies(selected_movies)
+  end
+  
   def search_tmdb
     if params[:search_terms].blank? then 
     flash[:notice] = "Invalid search term"
