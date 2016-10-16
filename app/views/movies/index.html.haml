@@ -2,9 +2,6 @@
 %h1 All Movies
 
 
-
-
-
 = form_tag movies_path, :method => :get, :id => 'ratings_form' do
   = hidden_field_tag "title_sort", true if @title_header
   = hidden_field_tag ":release_date_sort", true if @date_header
@@ -28,10 +25,10 @@
         %td= movie.rating
         %td= movie.release_date
         %td= link_to "More about #{movie.title}", movie_path(movie)
-Search for movie titles containing <br>
+Search for movie titles containing: <br>
 
-= form_tag '/movies/search_tmdb', :method => :post, :id => 'search_form' do
-  = text_field_tag :search_terms, params[:search_terms], placeholder: "Search Movies"
-  = submit_tag 'Search TMDb'
+= form_tag '/movies/search_tmdb', :method => :post do
+  = text_field_tag :search_terms, params[:search_terms], placeholder: "Search Movies", :id => 'search_box'
+  = submit_tag 'Search TMDb', :id => 'search_button'
   
 = link_to 'Add new movie', new_movie_path

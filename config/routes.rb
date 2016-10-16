@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   post '/movies/search_tmdb' => 'movies#search_tmdb'
   #post '/movies' => 'movies#add_selected_movies'
   
-  post "/movies/add_selected_movies" => "movies#add_selected_movies"
+  post "/movies/add_tmdb" => "movies#add_tmdb"
   # Example resource route with options:
   #   resources :products do
   #     member do

@@ -61,9 +61,10 @@ class MoviesController < ApplicationController
     redirect_to movies_path
   end
   
-  def add_selected_movies
+  def add_tmdb
     selected_movies = params[:tmdb_movies].keys
-    Movie.add_selected_movies(selected_movies)
+    Movie.create_from_tmdb(selected_movies)
+    flash[:notice] = "Movies successfully added to Rotten Potatoes"
     redirect_to movies_path
   end
   

@@ -1,4 +1,5 @@
-= form_tag '/movies/add_selected_movies', :id => 'add_selected_movies' do
+%h1 The following movies containing '#{params[:search_terms]}' were found on TMDb
+= form_tag '/movies/add_tmdb' do
   %table#movies
     %thead
       %tr
@@ -12,7 +13,8 @@
           %td= movie.title 
           %td= Movie.find_rating(movie.id)
           %td= movie.release_date
-          %td= check_box_tag "tmdb_movies[#{movie.id}]"
-  = submit_tag 'add em movies yo'
+          %td <input id="checkbox_#{movie.id}" name="tmdb_movies[#{movie.id}]" type= "checkbox"/>
+          
+  = submit_tag 'Add Selected Movies', :id => 'movies_button'
 = link_to 'Return to Movie List', movies_path
 
