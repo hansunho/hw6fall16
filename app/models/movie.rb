@@ -16,6 +16,7 @@ class Movie < ActiveRecord::Base
   
   def self.find_rating(movieID)
     movies = Tmdb::Movie.releases(movieID)['countries']
+    if movies.nil? then return "N/A" end
     for i in 0..movies.size-1
       if (movies[i]["iso_3166_1"] == "US" && !movies[i]["certification"].blank?) then return movies[i]['certification']
       end  
@@ -23,14 +24,15 @@ class Movie < ActiveRecord::Base
        "No MPAA raiting available"
   end
   
-  def add_selected_movies(movies)
+  
+  def self.add_selected_movies(movies)
     for i in 0..movies.size-1
-      tmdbMovie = Tmdb::Find.imdb_id(i)
+      tmdbMovie = Tmdb::Movie.detail(movies[i])
       movie = Movie.new()
-      movie.title = tmdbMovie.title
-      movie.release_date = tmdbMovie.release_date
-      movie.rating = find_rating(i)
-      movie.description = tmdbMovie.overview
+      movie.title = tmdbMovie['title']
+      movie.release_date = tmdbMovie['release_date']
+      movie.rating = find_rating(movies[i])
+      movie.description = tmdbMovie['overview']
       movie.save!
     end
   end

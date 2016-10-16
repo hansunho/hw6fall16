@@ -1,4 +1,4 @@
-= form_tag '/movies', :method => :post do
+= form_tag '/movies/add_selected_movies', :id => 'add_selected_movies' do
   %table#movies
     %thead
       %tr
@@ -13,6 +13,6 @@
           %td= Movie.find_rating(movie.id)
           %td= movie.release_date
           %td= check_box_tag "tmdb_movies[#{movie.id}]"
-  = submit_tag 'Search TMDb'
+  = submit_tag 'add em movies yo'
 = link_to 'Return to Movie List', movies_path
 

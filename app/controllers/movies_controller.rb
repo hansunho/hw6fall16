@@ -64,6 +64,7 @@ class MoviesController < ApplicationController
   def add_selected_movies
     selected_movies = params[:tmdb_movies].keys
     Movie.add_selected_movies(selected_movies)
+    redirect_to movies_path
   end
   
   def search_tmdb
