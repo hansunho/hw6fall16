@@ -62,9 +62,13 @@ class MoviesController < ApplicationController
   end
   
   def add_tmdb
+    if !params[:tmdb_movies].nil? then 
     selected_movies = params[:tmdb_movies].keys
     Movie.create_from_tmdb(selected_movies)
     flash[:notice] = "Movies successfully added to Rotten Potatoes"
+    else
+      flash[:notice] = "No movies selected"
+    end
     redirect_to movies_path
   end
   
